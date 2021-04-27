@@ -1,7 +1,6 @@
 # To build:
-# export GITUSER=menanteau
 # export SPTUSER=$USER
-# docker build -t spt3g_ubuntu --build-arg SPTUSER --build-arg GITUSER --build-arg GITPASS --rm=true .
+# docker build -t spt3g_ubuntu --build-arg SPTUSER --rm=true .
 
 # To start:
 # hostname="`hostname -s`-docker"
@@ -28,15 +27,11 @@ RUN apt-get install -y python-numpy
 RUN apt-get install -y hdf5-tools hdf5-helpers
 RUN apt-get install -y python-is-python3
 
-# Github user and passwd
-ARG GITUSER
-ARG GITPASS
-
 RUN mkdir -p /opt/spt \
     && cd /opt/spt
 
+COPY spt3g_software /opt/spt/spt3g_software
 WORKDIR /opt/spt
-RUN git clone https://$GITUSER:$GITPASS@github.com/SouthPoleTelescope/spt3g_software.git
 
 # Build the spt3g software
 RUN cd spt3g_software \
