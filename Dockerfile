@@ -25,7 +25,11 @@ RUN apt-get install -y python3-numpy python3-scipy python3-astropy python3-sphin
 RUN apt-get install -y python3-numexpr python3-healpy ipython3
 RUN apt-get install -y python-numpy
 RUN apt-get install -y hdf5-tools hdf5-helpers
+RUN apt-get install -y python3-fitsio python3-yaml
 RUN apt-get install -y python-is-python3
+
+# cfitsio/fpack
+RUN apt-get install -y libcfitsio-bin
 
 RUN mkdir -p /opt/spt \
     && cd /opt/spt
@@ -40,6 +44,7 @@ RUN cd spt3g_software \
     && cmake ..\
     && make \
     && ./env-shell.sh make docs
+
 
 # Add $SPTUSER as user and create groups wheel and spt
 ARG SPTUSER

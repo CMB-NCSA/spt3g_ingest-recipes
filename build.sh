@@ -1,6 +1,6 @@
 # Clone locally
-rm -rf spt3g_software
-git clone https://github.com/SouthPoleTelescope/spt3g_software.git
+#rm -rf spt3g_software
+#git clone https://github.com/SouthPoleTelescope/spt3g_software.git
 
 # Build container
 export SPTUSER=$USER
