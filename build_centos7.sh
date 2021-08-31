@@ -5,4 +5,4 @@
 # Build container
 export SPTUSER=$USER
 export TAG=`date +"%Y%B%d"`
-docker build -t menanteau/spt3g_ubuntu:$TAG --build-arg SPTUSER --rm=true .
+docker build -f centos7/Dockerfile -t menanteau/spt3g_centos7:$TAG --build-arg SPTUSER --rm=true .
