@@ -52,3 +52,24 @@ RUN cd spt3g_software \
     && cmake ..\
     && make \
     && ./env-shell.sh make docs
+
+# Add $SPTUSER as user and create groups wheel and spt
+ARG SPTUSER
+RUN adduser --shell /bin/bash -u 1001 $SPTUSER && \
+    groupadd --gid 1003 spt
+
+# Add $SPTUSER to wheel and spt
+RUN usermod -aG wheel $SPTUSER && \
+    usermod -aG spt $SPTUSER
+
+# Make mount directory to mirror /data/spt3g
+RUN mkdir -p /data/spt3g && \
+    chgrp spt /data/spt3g && \
+    chmod g+wrx /data/spt3g
+
+ENV USER $SPTUSER
+ENV HOME /home/$SPTUSER
+ENV SHELL /bin/bash
+
+USER $SPTUSER
+WORKDIR /home/$SPTUSER
