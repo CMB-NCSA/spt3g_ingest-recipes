@@ -28,6 +28,7 @@ RUN apt-get install -y hdf5-tools hdf5-helpers
 RUN apt-get install -y python3-fitsio python3-yaml
 RUN apt-get install -y python3-pandas
 RUN apt-get install -y python-is-python3
+RUN apt-get install -y screen
 
 # cfitsio/fpack
 RUN apt-get install -y libcfitsio-bin
