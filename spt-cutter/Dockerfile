@@ -5,7 +5,7 @@ ARG MINICONDA_PATH
 RUN yum -y update
 RUN yum -y install epel-release
 RUN yum -y install which wget git make
-RUN yum -y install fpack
+RUN yum -y install fpack screen
 
 # Conda installation, using python38
 RUN mkdir -p ${MINICONDA_PATH} \
@@ -23,15 +23,11 @@ RUN source $MINICONDA_PATH/bin/activate && \
     conda install -y -c conda-forge esutil && \
     conda install -y -c menanteau spt3g_cutter
 
-
 # Add $SPTUSER as user and create groups wheel and spt
+ARG UID_NUMBER
 ARG SPTUSER
-RUN adduser --shell /bin/bash -u 1001 $SPTUSER && \
+RUN adduser --shell /bin/bash -u $UID_NUMBER $SPTUSER && \
     groupadd --gid 1003 spt
-
-# Add $SPTUSER to wheel and spt
-RUN usermod -aG wheel $SPTUSER && \
-    usermod -aG spt $SPTUSER
 
 # Make mount directory to mirror /data/spt3g
 RUN mkdir -p /data/spt3g && \
