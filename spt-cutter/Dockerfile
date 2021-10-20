@@ -20,7 +20,7 @@ RUN source $MINICONDA_PATH/bin/activate &&\
 
 RUN source $MINICONDA_PATH/bin/activate && \
     conda install -y astropy=4.1 fitsio pandas && \
-    conda install -y -c conda-forge esutil && \
+    conda install -y -c conda-forge esutil pyaml-env && \
     conda install -y -c menanteau spt3g_cutter
 
 # Add $SPTUSER as user and create groups wheel and spt
