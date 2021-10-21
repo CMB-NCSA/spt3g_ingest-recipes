@@ -1,6 +1,7 @@
 FROM centos:7
 
 ARG MINICONDA_PATH
+ARG SPT3G_CUTTER_VERSION=0.2.0
 
 RUN yum -y update
 RUN yum -y install epel-release
@@ -21,7 +22,7 @@ RUN source $MINICONDA_PATH/bin/activate &&\
 RUN source $MINICONDA_PATH/bin/activate && \
     conda install -y astropy=4.1 fitsio pandas && \
     conda install -y -c conda-forge esutil pyaml-env && \
-    conda install -y -c menanteau spt3g_cutter
+    conda install -y -c menanteau spt3g_cutter==${SPT3G_CUTTER_VERSION}
 
 # Add $SPTUSER as user and create groups wheel and spt
 ARG UID_NUMBER
@@ -38,5 +39,16 @@ ENV USER $SPTUSER
 ENV HOME /home/$SPTUSER
 ENV SHELL /bin/bash
 
+COPY spt-cutter/startup.sh $HOME/.startup.sh
+
+RUN chmod a+x /home/$SPTUSER/.startup.sh && \
+    chown $SPTUSER:$SPTUSER /home/$SPTUSER/.startup.sh
+
+ARG SPTHOME=/home/${SPTUSER}
+
 USER $SPTUSER
 WORKDIR /home/$SPTUSER
+ENV MINICONDA_PATH ${MINICONDA_PATH}
+
+# Start with conda and spt_cutter initialized
+ENTRYPOINT ["sh",".startup.sh"]
