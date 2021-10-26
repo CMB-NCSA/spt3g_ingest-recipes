@@ -1,5 +1,5 @@
 # spt3g_docker
-Docker recipes for SPT-3G Science codes.
+Recipes for spt3g_ingest repo
 
 # To build:
 ```
