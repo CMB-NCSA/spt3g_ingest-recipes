@@ -1,14 +1,18 @@
 # Clone locally
-#rm -rf spt3g_software
-#git clone https://github.com/SouthPoleTelescope/spt3g_software.git
+# rm -rf spt3g_software
+# git clone https://github.com/SouthPoleTelescope/spt3g_software.git
+cd spt3g_software
+SPT3G_REV=`git rev-parse --short HEAD`
+cd ../
 
 # Build container
+export DISTRO=centos7
+export IMAGE=spt3g_ingest
 export SPTUSER=$USER
-export TAG=`date +"%Y%B%d"`
-docker build -f centos7/Dockerfile -t menanteau/spt3g_centos7:$TAG --build-arg SPTUSER --rm=true .
-docker tag menanteau/spt3g_centos7:$TAG registry.gitlab.com/spt3g/kubernetes/spt-cutter_centos7:$TAG
-echo "Push commands:"
-echo "   docker pysh menanteau/spt3g_centos7:${TAG}"
-echo "   docker push registry.gitlab.com/spt3g/kubernetes/spt-cutter_centos7:${TAG}"
-# Push to gitlab
-# docker login registry.gitlab.com
+#export TAG=`date +"%Y%B%d"`
+export SPT3G_INGEST_VERSION=dev
+export TAG=${DISTRO}_${SPT3G_INGEST_VERSION}_${SPT3G_REV}
+docker build -f $DISTRO/Dockerfile -t menanteau/$IMAGE:$TAG --build-arg SPTUSER --rm=true .
+
+echo 'Push commands:'
+echo "   docker push menanteau/$IMAGE:${TAG}"
