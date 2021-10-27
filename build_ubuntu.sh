@@ -10,9 +10,13 @@ export DISTRO=ubuntu
 export IMAGE=spt3g_ingest
 export SPTUSER=$USER
 #export TAG=`date +"%Y%B%d"`
-export SPT3G_INGEST_VERSION=dev
+export SPT3G_INGEST_VERSION=0.2.1
 export TAG=${DISTRO}_${SPT3G_INGEST_VERSION}_${SPT3G_REV}
-docker build -f $DISTRO/Dockerfile -t menanteau/$IMAGE:$TAG --build-arg SPTUSER --rm=true .
+docker build -f $DISTRO/Dockerfile \
+       -t menanteau/$IMAGE:$TAG \
+       --build-arg SPT3G_INGEST_VERSION \
+       --build-arg SPTUSER \
+       --rm=true .
 
 echo 'Push commands:'
 echo "   docker push menanteau/$IMAGE:${TAG}"

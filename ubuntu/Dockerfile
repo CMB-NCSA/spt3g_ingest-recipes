@@ -47,6 +47,12 @@ RUN cd spt3g_software \
     && make \
     && ./env-shell.sh make docs
 
+# Git clone and version checkout and install of spt3g_ingest
+ARG SPT3G_INGEST_VERSION
+RUN git clone https://github.com/CMB-NCSA/spt3g_ingest -b $SPT3G_INGEST_VERSION && \
+    cd spt3g_ingest && \
+    python setup.py install
+
 # Add $SPTUSER as user and create groups wheel and spt
 ARG SPTUSER
 RUN useradd -ms /bin/bash -u 1001 $SPTUSER && \
@@ -65,6 +71,16 @@ RUN mkdir -p /data/spt3g && \
 ENV USER $SPTUSER
 ENV HOME /home/$SPTUSER
 ENV SHELL /bin/bash
+
+COPY ubuntu/setSPTEnv.sh /opt/spt/setSPTEnv.sh
+
+# more ENV
+ENV SPT3G_SOFTWARE_PATH /opt/spt/spt3g_software
+ENV SPT3G_SOFTWARE_BUILD_PATH /opt/spt/spt3g_software/build
+ENV SPT3G_BUILD_ROOT ${SPT3G_SOFTWARE_BUILD_PATH}
+ENV PATH ${SPT3G_BUILD_ROOT}/bin:$PATH
+ENV LD_LIBRARY_PATH ${SPT3G_BUILD_ROOT}/spt3g:$LD_LIBRARY_PATH
+ENV PYTHONPATH ${SPT3G_BUILD_ROOT}:$PYTHONPATH
 
 USER $SPTUSER
 WORKDIR /home/$SPTUSER
