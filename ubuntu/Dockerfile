@@ -28,6 +28,7 @@ RUN apt-get install -y hdf5-tools hdf5-helpers
 RUN apt-get install -y python3-fitsio python3-yaml
 RUN apt-get install -y python3-pandas
 RUN apt-get install -y python-is-python3
+RUN apt-get install -y python3-magic
 RUN apt-get install -y screen
 
 # cfitsio/fpack
@@ -46,6 +47,7 @@ RUN cd spt3g_software \
     && cmake ..\
     && make \
     && ./env-shell.sh make docs
+
 
 # Git clone and version checkout and install of spt3g_ingest
 ARG SPT3G_INGEST_VERSION
@@ -84,3 +86,6 @@ ENV PYTHONPATH ${SPT3G_BUILD_ROOT}:$PYTHONPATH
 
 USER $SPTUSER
 WORKDIR /home/$SPTUSER
+
+# Start with the right environment
+ENTRYPOINT ["sh", "/opt/spt/setSPTEnv.sh"]
