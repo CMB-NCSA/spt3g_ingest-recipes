@@ -65,4 +65,4 @@ USER 1000
 WORKDIR /home/jovyan
 
 # Start with the right environment
-ENTRYPOINT ["sh", "/opt/spt/setSPTEnv.sh"]
+#ENTRYPOINT ["sh", "/opt/spt/setSPTEnv.sh"]
