@@ -8,17 +8,14 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tz
 RUN apt-get install -y wget emacs git
 # Pre-reqs from:
 # https://southpoletelescope.github.io/spt3g_software/quickstart.html
-RUN apt-get install -y build-essential
-RUN apt-get install -y cmake libboost-all-dev libflac-dev libnetcdf-dev libfftw3-dev libgsl0-dev
-RUN apt-get install -y hdf5-tools hdf5-helpers
+RUN apt-get install -y build-essential cmake libboost-all-dev libflac-dev libnetcdf-dev libfftw3-dev libgsl0-dev hdf5-tools hdf5-helpers
 
 # Get back into the jupyter environment
 ENV CONDA_DIR=/opt/conda SHELL=/bin/bash NB_USER=jovyan NB_UID=1000 NB_GID=100 LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8 LANGUAGE=en_US.UTF-8
 ENV PATH=/opt/conda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin HOME=/home/jovyan
 
 # Python extras for spt3g_software
-RUN conda install -y fitsio astropy pandas yaml healpy numexpr
-RUN conda install -y boost boost-cpp
+RUN conda install -y fitsio astropy pandas yaml healpy numexpr boost boost-cpp
 RUN conda install -y -c main py-boost
 
 COPY spt3g_software /opt/spt/spt3g_software
@@ -42,8 +39,10 @@ ENV PATH ${SPT3G_BUILD_ROOT}/bin:$PATH
 ENV LD_LIBRARY_PATH ${SPT3G_BUILD_ROOT}/spt3g:$LD_LIBRARY_PATH
 ENV PYTHONPATH ${SPT3G_BUILD_ROOT}:$PYTHONPATH
 
+# Extras for spt3g_ingest and spt3g_cutter
+
 # Install the spt3g_cutter
-RUN conda install -y -c conda-forge esutil pyaml-env
+RUN conda install -y -c conda-forge esutil pyaml-env python-magic
 ARG SPT3G_CUTTER_VERSION
 WORKDIR /tmp
 RUN git clone https://github.com/CMB-NCSA/spt3g_cutter -b $SPT3G_CUTTER_VERSION && \
@@ -51,7 +50,6 @@ RUN git clone https://github.com/CMB-NCSA/spt3g_cutter -b $SPT3G_CUTTER_VERSION 
     python setup.py install
 
 # Install spt3g_ingest
-RUN conda install -y -c conda-forge python-magic
 ARG SPT3G_INGEST_VERSION
 RUN git clone https://github.com/CMB-NCSA/spt3g_ingest -b $SPT3G_INGEST_VERSION && \
     cd spt3g_ingest && \
