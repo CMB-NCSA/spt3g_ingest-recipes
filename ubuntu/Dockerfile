@@ -12,7 +12,7 @@
 
 FROM ubuntu:20.04
 
-RUN apt-get update
+RUN apt-get update --fix-missing
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tzdata
 RUN apt-get install -y wget emacs git
