@@ -8,4 +8,7 @@ export PATH=${SPT3G_BUILD_ROOT}/bin:$PATH
 export LD_LIBRARY_PATH=${SPT3G_BUILD_ROOT}/spt3g:$LD_LIBRARY_PATH
 export PYTHONPATH=${SPT3G_BUILD_ROOT}:$PYTHONPATH
 
+echo "Adding spt3g_ingest"
+source /opt/spt/spt3g_ingest/setpath.sh /opt/spt/spt3g_ingest
+
 /bin/bash --rcfile ~/.bashrc
