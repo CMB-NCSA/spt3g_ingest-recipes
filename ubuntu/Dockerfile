@@ -88,4 +88,4 @@ USER $SPTUSER
 WORKDIR /home/$SPTUSER
 
 # Start with the right environment
-ENTRYPOINT ["sh", "/opt/spt/setSPTEnv.sh"]
+ENTRYPOINT ["/bin/bash", "/opt/spt/setSPTEnv.sh"]
