@@ -55,6 +55,8 @@ RUN git clone https://github.com/CMB-NCSA/spt3g_ingest -b $SPT3G_INGEST_VERSION 
     cd spt3g_ingest && \
     python setup.py install
 
+RUN apt-get install -y time
+
 # Add $SPTUSER as user and create groups wheel and spt
 ARG SPTUSER
 RUN useradd -ms /bin/bash -u 1001 $SPTUSER && \
