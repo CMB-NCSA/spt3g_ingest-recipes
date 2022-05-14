@@ -13,8 +13,8 @@
 FROM ubuntu:20.04
 
 RUN apt-get update --fix-missing
-
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tzdata
+RUN apt-get update --fix-missing
 RUN apt-get install -y wget emacs git
 # Pre-reqs from:
 # https://southpoletelescope.github.io/spt3g_software/quickstart.html
@@ -23,13 +23,9 @@ RUN apt-get install -y cmake libboost-all-dev libflac-dev libnetcdf-dev libfftw3
 # Astropy/numpy/scipy
 RUN apt-get install -y python3-numpy python3-scipy python3-astropy python3-sphinx
 RUN apt-get install -y python3-numexpr python3-healpy ipython3
-RUN apt-get install -y python-numpy
-RUN apt-get install -y hdf5-tools hdf5-helpers
-RUN apt-get install -y python3-fitsio python3-yaml
-RUN apt-get install -y python3-pandas
-RUN apt-get install -y python-is-python3
-RUN apt-get install -y python3-magic
-RUN apt-get install -y screen
+RUN apt-get install -y python-numpy hdf5-tools hdf5-helpers
+RUN apt-get install -y python3-fitsio python3-yaml python3-pandas python-is-python3
+RUN apt-get install -y python3-magic screen time
 
 # cfitsio/fpack
 RUN apt-get install -y libcfitsio-bin
@@ -55,7 +51,6 @@ RUN git clone https://github.com/CMB-NCSA/spt3g_ingest -b $SPT3G_INGEST_VERSION 
     cd spt3g_ingest && \
     python setup.py install
 
-RUN apt-get install -y time
 
 # Add $SPTUSER as user and create groups wheel and spt
 ARG SPTUSER
@@ -89,5 +84,8 @@ ENV PYTHONPATH ${SPT3G_BUILD_ROOT}:$PYTHONPATH
 USER $SPTUSER
 WORKDIR /home/$SPTUSER
 
+# Start with the right miniconda environment
+RUN cat /opt/spt/setSPTEnv.sh >> $HOME/.bashrc
+
 # Start with the right environment
-ENTRYPOINT ["/bin/bash", "/opt/spt/setSPTEnv.sh"]
+#ENTRYPOINT ["/bin/bash", "/opt/spt/setSPTEnv.sh"]

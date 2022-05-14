@@ -10,5 +10,3 @@ export PYTHONPATH=${SPT3G_BUILD_ROOT}:$PYTHONPATH
 
 echo "Adding spt3g_ingest"
 source /opt/spt/spt3g_ingest/setpath.sh /opt/spt/spt3g_ingest
-
-/bin/bash --rcfile ~/.bashrc
