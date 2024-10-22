@@ -16,6 +16,7 @@ docker build -f $DISTRO/Dockerfile \
        -t menanteau/$IMAGE:$TAG \
        --build-arg SPT3G_INGEST_VERSION \
        --build-arg SPTUSER \
+       --no-cache \
        --rm=true .
 
 echo 'Push commands:'
