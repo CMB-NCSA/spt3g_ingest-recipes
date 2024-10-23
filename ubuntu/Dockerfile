@@ -10,7 +10,10 @@
 # Clean up:
 # docker rm $(docker ps -a -q)
 
-FROM ubuntu:20.04
+# Older ubuntu version
+# FROM ubuntu:20.04
+# Latest version
+FROM ubuntu:22.04
 
 RUN apt-get update --fix-missing
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tzdata
@@ -23,7 +26,7 @@ RUN apt-get install -y cmake libboost-all-dev libflac-dev libnetcdf-dev libfftw3
 # Astropy/numpy/scipy
 RUN apt-get install -y python3-numpy python3-scipy python3-astropy python3-sphinx
 RUN apt-get install -y python3-numexpr python3-healpy ipython3
-RUN apt-get install -y python-numpy hdf5-tools hdf5-helpers
+RUN apt-get install -y hdf5-tools hdf5-helpers
 RUN apt-get install -y python3-fitsio python3-yaml python3-pandas python-is-python3
 RUN apt-get install -y python3-magic screen time
 
