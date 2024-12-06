@@ -57,7 +57,7 @@ RUN git clone https://github.com/CMB-NCSA/spt3g_ingest -b $SPT3G_INGEST_VERSION 
 
 # Add $SPTUSER as user and create groups wheel and spt
 ARG SPTUSER
-RUN useradd -ms /bin/bash -u 1001 $SPTUSER && \
+RUN useradd -ms /bin/bash -u 47448 $SPTUSER && \
     addgroup wheel && \
     addgroup -gid 1003 spt
 
