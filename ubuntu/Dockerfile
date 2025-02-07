@@ -29,6 +29,7 @@ RUN apt-get install -y python3-numexpr python3-healpy ipython3
 RUN apt-get install -y hdf5-tools hdf5-helpers
 RUN apt-get install -y python3-fitsio python3-yaml python3-pandas python-is-python3
 RUN apt-get install -y python3-magic screen time
+RUN apt-get install -y python3-photutils
 
 # cfitsio/fpack
 RUN apt-get install -y libcfitsio-bin
