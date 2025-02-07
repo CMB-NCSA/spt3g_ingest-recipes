@@ -24,11 +24,15 @@ RUN apt-get install -y wget emacs git
 RUN apt-get install -y cmake libboost-all-dev libflac-dev libnetcdf-dev libfftw3-dev libgsl0-dev
 
 # Astropy/numpy/scipy
-RUN apt-get install -y python3-numpy python3-scipy python3-astropy python3-sphinx python3-photutils
-RUN apt-get install -y python3-numexpr python3-healpy ipython3
+#RUN apt-get install -y python3-numpy python3-scipy python3-astropy python3-sphinx
+#RUN apt-get install -y python3-sphinx
+#RUN apt-get install -y python3-numexpr python3-healpy ipython3
+#RUN apt-get install -y python3-fitsio python3-yaml python3-pandas python-is-python3
+#RUN apt-get install -y python3-magic screen time
 RUN apt-get install -y hdf5-tools hdf5-helpers
-RUN apt-get install -y python3-fitsio python3-yaml python3-pandas python-is-python3
-RUN apt-get install -y python3-magic screen time
+RUN apt-get install -y python3-pip python-is-python3
+RUN pip3 install photutils numpy scipy numexpr healpy fitsio pandas pyyaml python-magic sphinx
+
 
 # cfitsio/fpack
 RUN apt-get install -y libcfitsio-bin
