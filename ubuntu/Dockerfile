@@ -13,7 +13,7 @@
 # Older ubuntu version
 # FROM ubuntu:20.04
 # Latest version
-FROM ubuntu:24.04
+FROM ubuntu:22.04
 
 RUN apt-get update --fix-missing
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tzdata
