@@ -13,7 +13,7 @@
 # Older ubuntu version
 # FROM ubuntu:20.04
 # Latest version
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 RUN apt-get update --fix-missing
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tzdata
@@ -31,9 +31,8 @@ RUN apt-get install -y cmake libboost-all-dev libflac-dev libnetcdf-dev libfftw3
 #RUN apt-get install -y python3-magic screen time
 RUN apt-get install -y hdf5-tools hdf5-helpers
 RUN apt-get install -y screen time
-RUN apt-get install -y python3-pip python-is-python3
-RUN pip3 install photutils numpy scipy numexpr healpy fitsio pandas pyyaml python-magic sphinx matplotlib
-
+RUN apt-get install -y python-is-python3
+RUN apt-get install -y python3-healpy python3-fitsio python3-pandas python3-yaml python3-magic python3-sphinx python3-matplotlib
 
 # cfitsio/fpack
 RUN apt-get install -y libcfitsio-bin
