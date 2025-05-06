@@ -33,6 +33,8 @@ RUN apt-get install -y hdf5-tools hdf5-helpers
 RUN apt-get install -y screen time
 RUN apt-get install -y python-is-python3
 RUN apt-get install -y python3-healpy python3-fitsio python3-pandas python3-yaml python3-magic python3-sphinx python3-matplotlib
+# This trick install distutils under the hood
+RUN apt-get install -y python3-pip
 
 # cfitsio/fpack
 RUN apt-get install -y libcfitsio-bin
