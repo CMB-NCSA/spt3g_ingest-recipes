@@ -56,10 +56,7 @@ RUN cd spt3g_software \
 
 # Git clone and version checkout and install of spt3g_ingest
 ARG SPT3G_INGEST_VERSION
-RUN git clone https://github.com/CMB-NCSA/spt3g_ingest -b $SPT3G_INGEST_VERSION && \
-    cd spt3g_ingest && \
-    python setup.py install
-
+RUN git clone https://github.com/CMB-NCSA/spt3g_ingest -b $SPT3G_INGEST_VERSION
 
 # Add $SPTUSER as user and create groups wheel and spt
 ARG SPTUSER
