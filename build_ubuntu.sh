@@ -10,7 +10,7 @@ export DISTRO=ubuntu
 export IMAGE=spt3g_ingest
 export SPTUSER=$USER
 #export TAG=`date +"%Y%B%d"`
-export SPT3G_INGEST_VERSION=0.5.0
+export SPT3G_INGEST_VERSION=0.5.1
 export TAG=${DISTRO}_${SPT3G_INGEST_VERSION}_${SPT3G_REV}
 docker build -f $DISTRO/Dockerfile \
        -t menanteau/$IMAGE:$TAG \
