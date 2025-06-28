@@ -53,6 +53,9 @@ RUN cd spt3g_software \
     && make \
     && ./env-shell.sh make docs
 
+# Temporarily fix for the galaxy ptsrc list
+RUN cd /opt/spt/spt3g_software/sources/python/main_lists && \
+    ln -s galaxy_ptsrc_mask_list.txt galaxy_ptsrc_list_2023.txt
 
 # Git clone and version checkout and install of spt3g_ingest
 ARG SPT3G_INGEST_VERSION
