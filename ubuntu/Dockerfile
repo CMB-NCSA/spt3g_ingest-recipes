@@ -35,6 +35,8 @@ RUN apt-get install -y python-is-python3
 RUN apt-get install -y python3-healpy python3-fitsio python3-pandas python3-yaml python3-magic python3-sphinx python3-matplotlib
 # This trick install distutils under the hood
 RUN apt-get install -y python3-pip
+# RUN pip install myst-parser --break-system-packages
+
 
 # cfitsio/fpack
 RUN apt-get install -y libcfitsio-bin
@@ -51,11 +53,11 @@ RUN cd spt3g_software \
     && cd build \
     && cmake ..\
     && make \
-    && ./env-shell.sh make docs
+    && ./env-shell.sh 
 
 # Temporarily fix for the galaxy ptsrc list
-RUN cd /opt/spt/spt3g_software/sources/python/mask_lists && \
-    ln -s galaxy_ptsrc_mask_list.txt galaxy_ptsrc_list_2023.txt
+# RUN cd /opt/spt/spt3g_software/sources/python/mask_lists && \
+#    ln -s galaxy_ptsrc_mask_list.txt galaxy_ptsrc_list_2023.txt
 
 # Git clone and version checkout and install of spt3g_ingest
 ARG SPT3G_INGEST_VERSION
